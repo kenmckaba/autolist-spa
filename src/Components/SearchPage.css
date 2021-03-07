@@ -1,0 +1,18 @@
+.SearchPage {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SearchPage button {
+  margin-top: 20px;
+  width: fit-content
+}
+
+.SearchPage .inputs {
+  display: flex
+}
+.SearchPage input {
+  margin: .5em;
+}
