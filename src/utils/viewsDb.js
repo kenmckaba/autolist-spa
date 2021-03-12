@@ -28,4 +28,19 @@ const getAndIncrement = async (vin) => {
   return record
 }
 
-export { loginDb, getAndIncrement }
+const favorites = []
+
+const storeFavorite = async (vin, isFavorite) => {
+  if (isFavorite) {
+    favorites.push(vin)
+  } else {
+    const index = favorites.indexOf(vin)
+    if (index > -1) {
+      favorites.splice(index, 1)
+    }
+  }
+}
+
+const retrieveFavorite = (vin) => favorites.indexOf(vin) >= 0
+
+export { loginDb, getAndIncrement, storeFavorite, retrieveFavorite }

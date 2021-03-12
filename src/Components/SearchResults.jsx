@@ -66,11 +66,13 @@ const SearchResults = ({ startPrice, endPrice, onDone }) => {
       <button type="submit" onClick={onDone}>
         Search again
       </button>
-      <CarModal
-        itemToView={itemToView}
-        viewCount={viewCount}
-        onClose={() => setItemToView(null)}
-      />
+      {itemToView && (
+        <CarModal
+          itemToView={itemToView}
+          viewCount={viewCount}
+          onClose={() => setItemToView(null)}
+        />
+      )}
     </div>
   )
 }
