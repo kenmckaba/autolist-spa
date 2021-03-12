@@ -9,8 +9,10 @@ const CarModal = ({ itemToView, viewCount, onClose }) => {
   const [isFavorite, setIsFavorite] = useState(false)
 
   const onFavorite = (vin) => {
-    storeFavorite(vin, !isFavorite)
-    setIsFavorite(!isFavorite)
+    setIsFavorite((wasFavorite) => {
+      storeFavorite(vin, !wasFavorite)
+      return !wasFavorite
+    })
   }
 
   useEffect(() => {
