@@ -16,7 +16,11 @@ const CarModal = ({ itemToView, viewCount, onClose }) => {
   }
 
   useEffect(() => {
-    setIsFavorite(retrieveFavorite(itemToView.vin))
+    const getFavorite = async () => {
+      const value = await retrieveFavorite(itemToView.vin)
+      setIsFavorite(value)
+    }
+    getFavorite()
   }, [])
 
   return (
@@ -33,11 +37,15 @@ const CarModal = ({ itemToView, viewCount, onClose }) => {
       <button onClick={onClose} type="submit">
         Close
       </button>
-      <input
-        type="checkbox"
-        checked={isFavorite}
-        onChange={() => onFavorite(itemToView.vin)}
-      />
+      <label htmlFor="favorites">
+        Add to favorites
+        <input
+          id="favorites"
+          type="checkbox"
+          checked={isFavorite}
+          onChange={() => onFavorite(itemToView.vin)}
+        />
+      </label>
     </Modal>
   )
 }

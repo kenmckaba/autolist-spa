@@ -28,19 +28,17 @@ const getAndIncrement = async (vin) => {
   return record
 }
 
-const favorites = []
-
 const storeFavorite = async (vin, isFavorite) => {
-  if (isFavorite) {
-    favorites.push(vin)
-  } else {
-    const index = favorites.indexOf(vin)
-    if (index > -1) {
-      favorites.splice(index, 1)
-    }
-  }
+  await views.findOneAndUpdate(
+    { vin, owner_id: app.currentUser.id },
+    { $set: { isFavorite } },
+    { new: true, upsert: true, returnNewDocument: true }
+  )
 }
 
-const retrieveFavorite = (vin) => favorites.indexOf(vin) >= 0
+const retrieveFavorite = async (vin) => {
+  const record = await views.findOne({ vin })
+  return !!record.isFavorite
+}
 
 export { loginDb, getAndIncrement, storeFavorite, retrieveFavorite }
