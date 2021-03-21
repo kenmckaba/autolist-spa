@@ -5,6 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch walmart labs Program",
+      "program": "${workspaceFolder}/walmartlabs.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
+    {
       "name": "Launch Chrome",
       "request": "launch",
       "type": "pwa-chrome",

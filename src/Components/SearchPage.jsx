@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { func } from 'prop-types'
+import { func, number } from 'prop-types'
 import './SearchPage.css'
 
-const SearchPage = ({ onSubmit }) => {
-  const [startPrice, setStartPrice] = useState(0)
-  const [endPrice, setEndPrice] = useState(0)
+const SearchPage = ({ startPrice, endPrice, onSubmit }) => {
+  const [startPriceLocal, setStartPriceLocal] = useState(startPrice)
+  const [endPriceLocal, setEndPriceLocal] = useState(endPrice)
 
   const submit = () => {
-    onSubmit(startPrice, endPrice)
+    onSubmit(startPriceLocal, endPriceLocal)
   }
 
   return (
@@ -17,8 +17,8 @@ const SearchPage = ({ onSubmit }) => {
       <div className="inputs">
         <div>
           <input
-            value={startPrice}
-            onChange={(e) => setStartPrice(Number(e.target.value))}
+            value={startPriceLocal}
+            onChange={(e) => setStartPriceLocal(Number(e.target.value))}
             type="text"
             placeholder="Start range"
           />
@@ -26,7 +26,7 @@ const SearchPage = ({ onSubmit }) => {
         <div>
           <input
             value={endPrice}
-            onChange={(e) => setEndPrice(Number(e.target.value))}
+            onChange={(e) => setEndPriceLocal(Number(e.target.value))}
             type="text"
             placeholder="End range"
           />
@@ -40,6 +40,8 @@ const SearchPage = ({ onSubmit }) => {
 }
 
 SearchPage.propTypes = {
+  startPrice: number.isRequired,
+  endPrice: number.isRequired,
   onSubmit: func.isRequired,
 }
 

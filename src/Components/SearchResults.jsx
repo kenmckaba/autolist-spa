@@ -9,7 +9,6 @@ import CarModal from './CarModal'
 
 const SearchResults = ({ startPrice, endPrice, onDone }) => {
   const [items, setItems] = useState([])
-  // eslint-disable-next-line no-unused-vars
   const [pageNum, setPageNum] = useState(1)
   const [maxPages, setMaxPages] = useState(0)
   const [itemToView, setItemToView] = useState(null)

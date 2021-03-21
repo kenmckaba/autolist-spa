@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react'
 import SearchResults from './SearchResults'
 import SearchPage from './SearchPage'
@@ -8,7 +9,7 @@ const SEARCH_RESULTS = 1
 const StartPage = () => {
   const [page, setPage] = useState(SEARCH_PAGE)
   const [startPrice, setStartPrice] = useState(0)
-  const [endPrice, setEndPrice] = useState(0)
+  const [endPrice, setEndPrice] = useState(10000)
 
   const setStartAndEnd = (start, end) => {
     setStartPrice(start)
@@ -17,7 +18,11 @@ const StartPage = () => {
   }
 
   return page === SEARCH_PAGE ? (
-    <SearchPage onSubmit={setStartAndEnd} />
+    <SearchPage
+      startPrice={startPrice}
+      endPrice={endPrice}
+      onSubmit={setStartAndEnd}
+    />
   ) : (
     <SearchResults
       startPrice={startPrice}
