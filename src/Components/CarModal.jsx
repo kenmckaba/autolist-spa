@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { func, number, shape } from 'prop-types'
 import ReactImageAppear from 'react-image-appear'
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  HStack,
+  VStack,
+} from '@chakra-ui/react'
 import { retrieveFavorite, storeFavorite } from '../utils/viewsDb'
 import './CarModal.css'
 
@@ -27,37 +36,42 @@ const CarModal = ({ itemToView, viewCount, onClose }) => {
 
   return (
     <Modal className="Modal" isOpen={!!itemToView} onRequestClose={onClose}>
-      <h1>Vehicle Details</h1>
-      <button className="Close-button" onClick={onClose} type="submit">
+      <Heading size="lg" mb="2">
+        Vehicle Details
+      </Heading>
+      <Button pos="absolute" right="0" top="0" onClick={onClose}>
         X
-      </button>
-      <div className="Car-details">
+      </Button>
+      <HStack align="flex-start">
         <ReactImageAppear
           className="image"
           src={itemToView?.primary_photo_url}
           placeholderClass="image"
         />
-        <div className="info">
-          <div className="Year-make-model">
+        <VStack align="flex-start">
+          <Box fontWeight="bold">
             {itemToView?.year} {itemToView?.make} {itemToView?.model}
-          </div>
-          <div>{itemToView?.mileage}</div>
-          <div>{itemToView?.price}</div>
-          <div>Location: {itemToView?.city}</div>
-          <div className="meta">
-            <div>Viewed {viewCount} times</div>
-            <label htmlFor="favorites">
-              <input
-                id="favorites"
-                type="checkbox"
-                checked={isFavorite}
-                onChange={() => onFavorite(itemToView.vin)}
-              />
+          </Box>
+          <Box>{itemToView?.mileage}</Box>
+          <Box>{itemToView?.price}</Box>
+          <Box>Location: {itemToView?.city}</Box>
+          <Flex
+            direction="column"
+            alignItems="center"
+            pos="absolute"
+            bottom="1"
+          >
+            <Box>Viewed {viewCount} times</Box>
+            <Checkbox
+              id="favorites"
+              checked={isFavorite}
+              onChange={() => onFavorite(itemToView.vin)}
+            >
               Add to favorites
-            </label>
-          </div>
-        </div>
-      </div>
+            </Checkbox>
+          </Flex>
+        </VStack>
+      </HStack>
     </Modal>
   )
 }

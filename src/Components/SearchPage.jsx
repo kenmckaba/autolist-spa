@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { func, number } from 'prop-types'
 import {
@@ -6,7 +5,6 @@ import {
   Heading,
   HStack,
   Input,
-  Stack,
   useColorMode,
   VStack,
 } from '@chakra-ui/react'

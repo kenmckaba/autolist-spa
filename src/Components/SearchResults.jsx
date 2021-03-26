@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { func, number } from 'prop-types'
+import { Box, Button, Heading, HStack, VStack } from '@chakra-ui/react'
 
 import { loginDb, getAndIncrement } from '../utils/viewsDb'
 import fetchResults from '../utils/fetchResults'
-import './SearchResults.css'
 import ResultsList from './ResultsList'
 import CarModal from './CarModal'
 
@@ -44,27 +44,29 @@ const SearchResults = ({ startPrice, endPrice, onDone }) => {
   }
 
   return (
-    <div className="ResultsPage">
-      <h2>Search Results</h2>
-      <div className="Range">
-        <div>Start: {startPrice}</div>
-        <div>End: {endPrice}</div>
-      </div>
-      Click an entry to view details
-      <button type="button" disabled={pageNum === 1} onClick={decrementPage}>
+    <VStack spacing={1} textAlign="center">
+      <Heading size="xl">Search Results</Heading>
+      <HStack>
+        <Box>Start: {startPrice}</Box>
+        <Box>End: {endPrice}</Box>
+      </HStack>
+      <Heading>Click an entry to view details</Heading>
+      <Button isDisabled={pageNum === 1} onClick={decrementPage}>
         Previous cars
-      </button>
-      <ResultsList items={items} onClick={onSelect} />
-      <button
-        type="button"
-        disabled={pageNum === maxPages}
-        onClick={incrementPage}
-      >
-        Next cars
-      </button>
-      <button type="submit" onClick={onDone}>
-        Search again
-      </button>
+      </Button>
+      <Box overflow="auto">
+        <ResultsList items={items} onClick={onSelect} />
+      </Box>
+      <VStack>
+        <Button
+          type="button"
+          isDisabled={pageNum === maxPages}
+          onClick={incrementPage}
+        >
+          Next cars
+        </Button>
+        <Button onClick={onDone}>Search again</Button>
+      </VStack>
       {itemToView && (
         <CarModal
           itemToView={itemToView}
@@ -72,7 +74,7 @@ const SearchResults = ({ startPrice, endPrice, onDone }) => {
           onClose={() => setItemToView(null)}
         />
       )}
-    </div>
+    </VStack>
   )
 }
 

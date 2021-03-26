@@ -1,24 +1,23 @@
 import React from 'react'
 import { func, arrayOf, shape } from 'prop-types'
+import { Box, HStack, List, ListItem } from '@chakra-ui/react'
 
 const ResultsList = ({ items, onClick }) => (
-  <ul>
+  <List>
     {items.map(
       (item) => (
-        <li key={item.vin}>
-          <div
-            role="button"
-            onClick={() => onClick(item)}
-            onKeyPress={() => {}}
-            tabIndex={0}
-          >
-            {item.make}&nbsp;{item.body_type}&nbsp;{item.price}
-          </div>
-        </li>
+        <ListItem key={item.vin} onClick={() => onClick(item)}>
+          <HStack justifyContent="space-between">
+            <Box>
+              {item.make} {item.body_type}
+            </Box>
+            <Box float="right">{item.price}</Box>
+          </HStack>
+        </ListItem>
       ),
       []
     )}
-  </ul>
+  </List>
 )
 
 ResultsList.propTypes = {
